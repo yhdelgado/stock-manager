@@ -1,42 +1,87 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div id="wrapper">
-        <div id="container">
-            <div>
-                Hello World       
-                            
-            </div>
-            <div></div>
-        </div>
-    </div>
+	<!-- Content Wrapper. Contains page content -->
+	<div
+		class="content-wrapper">
+		<!-- Content Header (Page header) -->
+		<section class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1>Boxed Layout</h1>
+					</div>
+					<div class="col-sm-6">
+						<ol class="breadcrumb float-sm-right">
+							<li class="breadcrumb-item">
+								<a href="#">Home</a>
+							</li>
+							<li class="breadcrumb-item">
+								<a href="#">Layout</a>
+							</li>
+							<li class="breadcrumb-item active">Boxed Layout</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+			<!-- /.container-fluid -->
+		</section>
+
+		<!-- Main content -->
+		<section class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div
+						class="col-12">
+						<!-- Default box -->
+						<div class="card">
+							<div class="card-header">
+								<h3 class="card-title">Title</h3>
+							</div>
+							<div class="card-body">
+								Start creating your amazing application!
+							</div>
+							<!-- /.card-body -->
+							<div class="card-footer">
+								Footer
+							</div>
+							<!-- /.card-footer-->
+						</div>
+						<!-- /.card -->
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- /.content -->
+	</div>
+	<!-- /.content-wrapper -->
 {% endblock %}
 
 {% block stylesheets %}
-    <style>
-    body { background: #F5F5F5; font: 18px/1.5 sans-serif; }
-    h1, h2 { line-height: 1.2; margin: 0 0 .5em; }
-    h1 { font-size: 36px; }
-    h2 { font-size: 21px; margin-bottom: 1em; }
-    p { margin: 0 0 1em 0; }
-    a { color: #0000F0; }
-    a:hover { text-decoration: none; }
-    code { background: #F5F5F5; max-width: 100px; padding: 2px 6px; word-wrap: break-word; }
-    #wrapper { background: #FFF; margin: 1em auto; max-width: 800px; width: 95%; }
-    #container { padding: 2em; }
-    #welcome, #status { margin-bottom: 2em; }
-    #welcome h1 span { display: block; font-size: 75%; }
-    #icon-status, #icon-book { float: left; height: 64px; margin-right: 1em; margin-top: -4px; width: 64px; }
-    #icon-book { display: none; }
-
-    @media (min-width: 768px) {
-        #wrapper { width: 80%; margin: 2em auto; }
-        #icon-book { display: inline-block; }
-        #status a, #next a { display: block; }
-
-        @-webkit-keyframes fade-in { 0% { opacity: 0; } 100% { opacity: 1; } }
-        @keyframes fade-in { 0% { opacity: 0; } 100% { opacity: 1; } }
-        .sf-toolbar { opacity: 0; -webkit-animation: fade-in 1s .2s forwards; animation: fade-in 1s .2s forwards;}
-    }
-</style>
+	{#     <style>
+			    body { background: #F5F5F5; font: 18px/1.5 sans-serif; }
+			    h1, h2 { line-height: 1.2; margin: 0 0 .5em; }
+			    h1 { font-size: 36px; }
+			    h2 { font-size: 21px; margin-bottom: 1em; }
+			    p { margin: 0 0 1em 0; }
+			    a { color: #0000F0; }
+			    a:hover { text-decoration: none; }
+			    code { background: #F5F5F5; max-width: 100px; padding: 2px 6px; word-wrap: break-word; }
+			    #wrapper { background: #FFF; margin: 1em auto; max-width: 800px; width: 95%; }
+			    #container { padding: 2em; }
+			    #welcome, #status { margin-bottom: 2em; }
+			    #welcome h1 span { display: block; font-size: 75%; }
+			    #icon-status, #icon-book { float: left; height: 64px; margin-right: 1em; margin-top: -4px; width: 64px; }
+			    #icon-book { display: none; }
+			
+			    @media (min-width: 768px) {
+			        #wrapper { width: 80%; margin: 2em auto; }
+			        #icon-book { display: inline-block; }
+			        #status a, #next a { display: block; }
+			
+			        @-webkit-keyframes fade-in { 0% { opacity: 0; } 100% { opacity: 1; } }
+			        @keyframes fade-in { 0% { opacity: 0; } 100% { opacity: 1; } }
+			        .sf-toolbar { opacity: 0; -webkit-animation: fade-in 1s .2s forwards; animation: fade-in 1s .2s forwards;}
+			    }
+			</style> #}
 {% endblock %}
