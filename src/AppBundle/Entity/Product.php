@@ -20,6 +20,11 @@ class Product
     /**
      * @ORM\Column(type="string", length=100)
      */
+    private $name;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
     private $upc;
 
     /**
@@ -87,4 +92,332 @@ class Product
      * @ORM\JoinColumn(name="invoice_id", referencedColumnName="id")
      */
     private $invoice;
+
+    /**
+     * Get the value of name
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set the value of name
+     *
+     * @return  self
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of upc
+     */
+    public function getUpc()
+    {
+        return $this->upc;
+    }
+
+    /**
+     * Set the value of upc
+     *
+     * @return  self
+     */
+    public function setUpc($upc)
+    {
+        $this->upc = $upc;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of amount
+     */
+    public function getAmount()
+    {
+        return $this->amount;
+    }
+
+    /**
+     * Set the value of amount
+     *
+     * @return  self
+     */
+    public function setAmount($amount)
+    {
+        $this->amount = $amount;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of cost
+     */
+    public function getCost()
+    {
+        return $this->cost;
+    }
+
+    /**
+     * Set the value of cost
+     *
+     * @return  self
+     */
+    public function setCost($cost)
+    {
+        $this->cost = $cost;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of sell_price
+     */
+    public function getSellPrice()
+    {
+        return $this->sell_price;
+    }
+
+    /**
+     * Set the value of sell_price
+     *
+     * @return  self
+     */
+    public function setSellPrice($sell_price)
+    {
+        $this->sell_price = $sell_price;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of weight_gr
+     */
+    public function getWeightGr()
+    {
+        return $this->weight_gr;
+    }
+
+    /**
+     * Set the value of weight_gr
+     *
+     * @return  self
+     */
+    public function setWeightGr($weight_gr)
+    {
+        $this->weight_gr = $weight_gr;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of weight_oz
+     */
+    public function getWeightOz()
+    {
+        return $this->weight_oz;
+    }
+
+    /**
+     * Set the value of weight_oz
+     *
+     * @return  self
+     */
+    public function setWeightOz($weight_oz)
+    {
+        $this->weight_oz = $weight_oz;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of weight_lb
+     */
+    public function getWeightLb()
+    {
+        return $this->weight_lb;
+    }
+
+    /**
+     * Set the value of weight_lb
+     *
+     * @return  self
+     */
+    public function setWeightLb($weight_lb)
+    {
+        $this->weight_lb = $weight_lb;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of brand
+     */
+    public function getBrand()
+    {
+        return $this->brand;
+    }
+
+    /**
+     * Set the value of brand
+     *
+     * @return  self
+     */
+    public function setBrand($brand)
+    {
+        $this->brand = $brand;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of description_en
+     */
+    public function getDescriptionEn()
+    {
+        return $this->description_en;
+    }
+
+    /**
+     * Set the value of description_en
+     *
+     * @return  self
+     */
+    public function setDescriptionEn($description_en)
+    {
+        $this->description_en = $description_en;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of description_es
+     */
+    public function getDescriptionEs()
+    {
+        return $this->description_es;
+    }
+
+    /**
+     * Set the value of description_es
+     *
+     * @return  self
+     */
+    public function setDescriptionEs($description_es)
+    {
+        $this->description_es = $description_es;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of photo
+     */
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    /**
+     * Set the value of photo
+     *
+     * @return  self
+     */
+    public function setPhoto($photo)
+    {
+        $this->photo = $photo;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of exp_date
+     */
+    public function getExpDate()
+    {
+        return $this->exp_date;
+    }
+
+    /**
+     * Set the value of exp_date
+     *
+     * @return  self
+     */
+    public function setExpDate($exp_date)
+    {
+        $this->exp_date = $exp_date;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of category
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * Set the value of category
+     *
+     * @return  self
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of invoice
+     */
+    public function getInvoice()
+    {
+        return $this->invoice;
+    }
+
+    /**
+     * Set the value of invoice
+     *
+     * @return  self
+     */
+    public function setInvoice($invoice)
+    {
+        $this->invoice = $invoice;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set the value of id
+     *
+     * @return  self
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of id
+     */
+    public function getWarehouse()
+    {
+        return $this->invoice->getWarehouse();
+    }
 }
