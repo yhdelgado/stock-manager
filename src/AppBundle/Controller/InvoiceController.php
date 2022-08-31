@@ -2,7 +2,7 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Purchase;
+use AppBundle\Entity\Invoice;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,25 +12,25 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class PurchaseController extends Controller
+class InvoiceController extends Controller
 {
     /**
-     * @Route("/purchase/list", name="purchase_list")
+     * @Route("/invoice/list", name="invoice_list")
      */
     public function listAction(Request $request)
     {
-        $repository = $this->getDoctrine()->getRepository(purchase::class);
-        $purchases = $repository->findAll();
-        return $this->render('purchase/list.html.twig', array('purchases' => $purchases));
+        $repository = $this->getDoctrine()->getRepository(Invoice::class);
+        $invoices = $repository->findAll();
+        return $this->render('invoice/list.html.twig', array('invoices' => $invoices));
     }
 
     /**
-     * @Route("/purchase/new", name="purchase_new")
+     * @Route("/invoice/new", name="invoice_new")
      */
     public function newAction(Request $request)
     {
-        $purchase = new Purchase();
-        $form = $this->createFormBuilder($purchase)
+        $invoice = new Invoice();
+        $form = $this->createFormBuilder($invoice)
             ->add('date', DateTimeType::class, array('label' => 'Date', 'attr' => array('class' => 'form-control')))
             ->add('warehouse', 'entity', array(
                 'class' => 'AppBundle:Warehouse',
@@ -40,32 +40,32 @@ class PurchaseController extends Controller
             ->getForm();
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $purchase = $form->getData();
+            $invoice = $form->getData();
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($purchase);
+            $entityManager->persist($invoice);
             $entityManager->flush();
-            return $this->redirectToRoute('purchase_list');
+            return $this->redirectToRoute('invoice_list');
         }
-        return $this->render('purchase/new.html.twig', array('form' => $form->createView()));
+        return $this->render('invoice/new.html.twig', array('form' => $form->createView()));
     }
 
     /**
-     * @Route("/purchase/{id}", name="purchase_show")
+     * @Route("/invoice/{id}", name="invoice_show")
      */
     public function showAction($id)
     {
-        $purchase = $this->getDoctrine()->getRepository(Purchase::class)->find($id);
-        return $this->render('purchase/show.html.twig', array('purchase' => $purchase));
+        $invoice = $this->getDoctrine()->getRepository(Invoice::class)->find($id);
+        return $this->render('invoice/show.html.twig', array('invoice' => $invoice));
     }
 
     /**
-     * @Route("/purchase/edit/{id}", name="purchase_edit")
+     * @Route("/invoice/edit/{id}", name="invoice_edit")
      * @Method({"GET","POST"})
      */
     public function editAction(Request $request, $id)
     {
-        $purchase = $this->getDoctrine()->getRepository(Purchase::class)->find($id);
-        $form = $this->createFormBuilder($purchase)
+        $invoice = $this->getDoctrine()->getRepository(Invoice::class)->find($id);
+        $form = $this->createFormBuilder($invoice)
             ->add('date', DateTimeType::class, array('label' => 'Date', 'attr' => array('class' => 'form-control')))
             ->add('warehouse', 'entity', array(
                 'class' => 'AppBundle:Warehouse',
@@ -77,23 +77,23 @@ class PurchaseController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->flush();
-            return $this->redirectToRoute('purchase_list');
+            return $this->redirectToRoute('invoice_list');
         }
-        return $this->render('purchase/edit.html.twig', array('form' => $form->createView()));
+        return $this->render('invoice/edit.html.twig', array('form' => $form->createView()));
     }
 
     /**
-     * @Route("/purchase/delete/{id}", name="purchase_delete")
+     * @Route("/invoice/delete/{id}", name="invoice_delete")
      * @Method({"GET"})
      */
     public function deleteAction(Request $request, $id)
     {
-        $purchase = $this->getDoctrine()->getRepository(Purchase::class)->find($id);
+        $invoice = $this->getDoctrine()->getRepository(Invoice::class)->find($id);
         $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->remove($purchase);
+        $entityManager->remove($invoice);
         $entityManager->flush();
         $response = new Response();
         $response->send();
-        return $this->redirectToRoute('purchase_list');
+        return $this->redirectToRoute('invoice_list');
     }
 }

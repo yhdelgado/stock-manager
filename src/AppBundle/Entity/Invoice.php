@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @Entity
  * @InheritanceType("SINGLE_TABLE")
  * @DiscriminatorColumn(name="type", type="string")
- * @DiscriminatorMap({"invoice" = "Invoice", "purchase" = "Purchase", "sale"="Sale"})
+ * @DiscriminatorMap({"invoice" = "Invoice", "sale"="Sale"})
  */
 class Invoice
 {
@@ -35,7 +35,7 @@ class Invoice
     private $products;
 
     /**
-     * @ORM\Column(type="decimal", length=50)
+     * @ORM\Column(type="decimal", length=50, nullable=true)
      */
     private $final_cost;
 
@@ -109,6 +109,26 @@ class Invoice
     public function setFinal_cost($final_cost)
     {
         $this->final_cost = $final_cost;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of warehouse
+     */
+    public function getWarehouse()
+    {
+        return $this->warehouse;
+    }
+
+    /**
+     * Set the value of warehouse
+     *
+     * @return  self
+     */
+    public function setWarehouse($warehouse)
+    {
+        $this->warehouse = $warehouse;
 
         return $this;
     }

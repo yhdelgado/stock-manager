@@ -9,7 +9,7 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1>Category</h1>
+						<h1>Invoice</h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
@@ -17,7 +17,7 @@
 								<a href="{{ path('homepage')}}">Home</a>
 							</li>
 							<li class="breadcrumb-item">
-								<a href="#">Category</a>
+								<a href="#">Invoice</a>
 							</li>
 						</ol>
 					</div>
@@ -35,18 +35,18 @@
 						<!-- Default box -->
 						<div class="card">
 							<div class="card-header">
-								<h3 class="card-title">{{category.description}}</h3>
+								<h3 class="card-title">{{invoice.id}}</h3>
 							</div>
 							<div class="card-body">
 								<p>
-									<strong>Description:</strong>
-									{{category.description}}</p>
+									<strong>Date:</strong>
+									{{invoice.date |date('Y-m-d')}}</p>
 
 							</div>
 							<!-- /.card-body -->
 							<div class="card-footer">
-								<a href="/category/edit/{{category.id}}" class="btn btn-primary">Edit</a>
-								<a href="/category/delete/{{category.id}}" class="btn btn-danger">Delete</a>
+								<a href="/invoice/edit/{{invoice.id}}" class="btn btn-primary">Edit</a>
+								<a href="/invoice/delete/{{invoice.id}}" class="btn btn-danger">Delete</a>
 							</div>
 							<!-- /.card-footer-->
 						</div>

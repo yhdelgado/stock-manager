@@ -9,7 +9,7 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1>Purchases</h1>
+						<h1>Invoices</h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
@@ -17,7 +17,7 @@
 								<a href="{{ path('homepage')}}">Home</a>
 							</li>
 							<li class="breadcrumb-item">
-								<a href="#">Purchases</a>
+								<a href="#">Invoices</a>
 							</li>
 						</ol>
 					</div>
@@ -36,7 +36,7 @@
 						<div class="card">
 							<div class="card-header">
 								<h3 class="card-title">
-									<a href="{{ path('purchase_new') }}" class="btn btn-success">Add new</a>
+									<a href="{{ path('invoice_new') }}" class="btn btn-success">Add new</a>
 								</h3>
 							</div>
 							<div class="card-body">
@@ -48,11 +48,11 @@
 									</thead>
 								</thdead>
 								<tbody>
-									{% for purchaseº in purchases %}
+									{% for invoice in invoices %}
 										<tr>
 											<td>
-												<a href="/purchase/{{purchase.id}}">Purchase
-													{{ purchase.id }}</a>
+												<a href="/invoice/{{invoice.id}}">Invoice
+													{{ invoice.id }}</a>
 											</td>
 										</tr>
 									{% endfor %}
@@ -63,7 +63,7 @@
 						<!-- /.card-body -->
 						<div class="card-footer">
 							Total
-							<span class="badge badge-info right">{{ purchases|length }}</span>
+							<span class="badge badge-info right">{{ invoices|length }}</span>
 							found
 						</div>
 						<!-- /.card-footer-->
@@ -78,6 +78,6 @@
 {% endblock %}
 {% block stylesheets %}
 	{#     <style>
-																											    
-																											</style> #}
+																																			    
+																																			</style> #}
 {% endblock %}

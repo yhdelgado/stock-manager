@@ -215,4 +215,24 @@ class Warehouse
 
         return $this;
     }
+
+    /**
+     * Get the value of invoices
+     */
+    public function getInvoices()
+    {
+        return $this->invoices;
+    }
+
+    /**
+     * Set the value of invoices
+     *
+     * @return  self
+     */
+    public function setInvoices($invoices)
+    {
+        $this->invoices = $invoices;
+
+        return $this;
+    }
 }
