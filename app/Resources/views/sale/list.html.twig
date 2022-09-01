@@ -9,7 +9,7 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1>Products</h1>
+						<h1>Sales</h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
@@ -17,7 +17,7 @@
 								<a href="{{ path('homepage')}}">Home</a>
 							</li>
 							<li class="breadcrumb-item">
-								<a href="#">Products</a>
+								<a href="#">Sales</a>
 							</li>
 						</ol>
 					</div>
@@ -36,9 +36,7 @@
 						<div class="card">
 							<div class="card-header">
 								<h3 class="card-title">
-									{{ form_start(form) }}
-									{{ form_widget(form) }}
-									{{ form_end(form) }}
+									<a href="{{ path('sale_new') }}" class="btn btn-success">Add new</a>
 								</h3>
 							</div>
 							<div class="card-body">
@@ -46,32 +44,26 @@
 									<thead>
 										<tr>
 											<th>Name</th>
-											<th>Category</th>
-											<th>Invoice</th>
+											<th>Client</th>
 											<th>Warehouse</th>
 										</tr>
 									</thead>
 								</thdead>
 								<tbody>
-								{% if products is defined  %}
-									{% for product in products %}
+									{% for sale in sales %}
 										<tr>
 											<td>
-												<a href="/product/{{product.id}}">{{ product.product_name }}</a>
+												<a href="/sale/{{sale.id}}">Sale
+													{{ sale.id }}</a>
 											</td>
 											<td>
-												<a href="/category/{{product.cid}}">{{ product.description }}</a>
+												{{ sale.client }}
 											</td>
 											<td>
-												<a href="/invoice/{{product.iid}}">Invoice
-													{{ product.iid }}</a>
-											</td>
-											<td>
-												<a href="/warehouse/{{product.wid}}">{{ product.warehouseName }}</a>
+												<a href="/warehouse/show/{{ sale.warehouse.id }}">{{ sale.warehouse.warehouse_name }}</a>
 											</td>
 										</tr>
 									{% endfor %}
-								{% endif %}
 								</tbody>
 							</table>
 
@@ -79,7 +71,7 @@
 						<!-- /.card-body -->
 						<div class="card-footer">
 							Total
-							<span class="badge badge-info right">{{ products|length }}</span>
+							<span class="badge badge-info right">{{ sales|length }}</span>
 							found
 						</div>
 						<!-- /.card-footer-->
@@ -94,6 +86,6 @@
 {% endblock %}
 {% block stylesheets %}
 	{#     <style>
-																																						    
-																																						</style> #}
+																																			    
+																																			</style> #}
 {% endblock %}

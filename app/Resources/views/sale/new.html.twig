@@ -1,4 +1,6 @@
 {% extends 'base.html.twig' %}
+{% block title %}New Sale
+{% endblock %}
 
 {% block body %}
 	<!-- Content Wrapper. Contains page content -->
@@ -9,7 +11,7 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1>Warehouse</h1>
+						<h1>Sales</h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
@@ -17,7 +19,7 @@
 								<a href="{{ path('homepage')}}">Home</a>
 							</li>
 							<li class="breadcrumb-item">
-								<a href="#">Warehouse</a>
+								<a href="#">Sale</a>
 							</li>
 						</ol>
 					</div>
@@ -35,38 +37,24 @@
 						<!-- Default box -->
 						<div class="card">
 							<div class="card-header">
-								<h3 class="card-title">{{warehouse.warehouse_name}}</h3>
+								<h3 class="card-title">
+									<p>Adding new</p>
+								</h3>
 							</div>
 							<div class="card-body">
-								<p>
-									<strong>Name:</strong>
-									{{warehouse.warehouse_name}}</p>
-								<p>
-									<strong>Owner:</strong>
-									{{warehouse.owner}}</p>
-								<p>
-									<strong>Address:</strong>
-									{{warehouse.address}}</p>
-								<p>
-									<strong>Phone:</strong>
-									{{warehouse.phone}}</p>
-								<p>
-									<strong>Latitude:</strong>
-									{{warehouse.latitude}}</p>
-								<p>
-									<strong>Longitude:</strong>
-									{{warehouse.longitude}}</p>
+								{{ form_start(form) }}
+								{{ form_widget(form) }}
+								{{ form_end(form) }}
 							</div>
 							<!-- /.card-body -->
-							<div class="card-footer">
-								<a href="/warehouse/edit/{{warehouse.id}}" class="btn btn-primary">Edit</a>
-								<a href="/warehouse/delete/{{warehouse.id}}" class="btn btn-danger">Delete</a>
-							</div>
+							<div class="card-footer"></div>
 							<!-- /.card-footer-->
 						</div>
 						<!-- /.card -->
 					</div>
 				</div>
-			</section><!-- /.content --></div><!-- /.content-wrapper -->{% endblock %}
-	{% block stylesheets %}{}
+			</section>
+			<!-- /.content -->
+		</div>
+		<!-- /.content-wrapper -->
 	{% endblock %}

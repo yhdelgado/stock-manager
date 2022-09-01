@@ -9,7 +9,7 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1>Warehouse</h1>
+						<h1>Sales</h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
@@ -17,7 +17,7 @@
 								<a href="{{ path('homepage')}}">Home</a>
 							</li>
 							<li class="breadcrumb-item">
-								<a href="#">Warehouse</a>
+								<a href="#">Sale</a>
 							</li>
 						</ol>
 					</div>
@@ -35,32 +35,21 @@
 						<!-- Default box -->
 						<div class="card">
 							<div class="card-header">
-								<h3 class="card-title">{{warehouse.warehouse_name}}</h3>
+								<h3 class="card-title">{{sale.id}}</h3>
 							</div>
 							<div class="card-body">
 								<p>
-									<strong>Name:</strong>
-									{{warehouse.warehouse_name}}</p>
+									<strong>Date:</strong>
+									{{sale.date |date('Y-m-d')}}</p>
 								<p>
-									<strong>Owner:</strong>
-									{{warehouse.owner}}</p>
-								<p>
-									<strong>Address:</strong>
-									{{warehouse.address}}</p>
-								<p>
-									<strong>Phone:</strong>
-									{{warehouse.phone}}</p>
-								<p>
-									<strong>Latitude:</strong>
-									{{warehouse.latitude}}</p>
-								<p>
-									<strong>Longitude:</strong>
-									{{warehouse.longitude}}</p>
+									<strong>Client:</strong>
+									{{sale.client}}</p>
+
 							</div>
 							<!-- /.card-body -->
 							<div class="card-footer">
-								<a href="/warehouse/edit/{{warehouse.id}}" class="btn btn-primary">Edit</a>
-								<a href="/warehouse/delete/{{warehouse.id}}" class="btn btn-danger">Delete</a>
+								<a href="/sale/edit/{{sale.id}}" class="btn btn-primary">Edit</a>
+								<a href="/sale/delete/{{sale.id}}" class="btn btn-danger">Delete</a>
 							</div>
 							<!-- /.card-footer-->
 						</div>

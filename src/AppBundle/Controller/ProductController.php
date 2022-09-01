@@ -38,7 +38,7 @@ class ProductController extends Controller
     {
         $product = new Product();
         $form = $this->createFormBuilder($product)
-            ->add('name', TextType::class, array('label' => 'Name', 'attr' => array('class' => 'form-control')))
+            ->add('product_name', TextType::class, array('label' => 'Name', 'attr' => array('class' => 'form-control')))
             ->add('upc', TextType::class, array('label' => 'UPC', 'attr' => array('class' => 'form-control')))
             ->add('amount', TextType::class, array('label' => 'Amount', 'attr' => array('class' => 'form-control')))
             ->add('cost', TextType::class, array('label' => 'Cost', 'attr' => array('class' => 'form-control')))
@@ -142,40 +142,34 @@ class ProductController extends Controller
     public function reportAction(Request $request)
     {
         $form = $this->createFormBuilder()
-            ->add('name', TextType::class, array('label' => 'Name', 'attr' => array('class' => 'form-control'), 'required' => false))
+            ->add('product_name', TextType::class, array('label' => 'Name', 'attr' => array('class' => 'form-control'), 'required' => false))
             ->add('category', 'entity', array(
                 'class' => 'AppBundle:Category',
                 'property' => 'description', 'label' => 'Category', 'attr' => array('class' => 'form-control'), 'required' => false
             ))
             ->add('warehouse', 'entity', array(
                 'class' => 'AppBundle:Warehouse',
-                'property' => 'name', 'label' => 'Warehouse', 'attr' => array('class' => 'form-control'), 'required' => false
+                'property' => 'warehouse_name', 'label' => 'Warehouse', 'attr' => array('class' => 'form-control'), 'required' => false
             ))
-            ->add('save', SubmitType::class, array('label' => 'Create', 'attr' => array('class' => 'btn btn-primary mt-3')))
+            ->add('save', SubmitType::class, array('label' => 'Search', 'attr' => array('class' => 'btn btn-primary mt-3')))
             ->getForm();
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            $rsm = new ResultSetMapping();
             $entityManager = $this->getDoctrine()->getManager();
-            $rsm = new ResultSetMappingBuilder($entityManager);
-            $rsm->addRootEntityFromClassMetadata('AppBundle\Entity\Product', 'p');
-            $rsm->addJoinedEntityFromClassMetadata('AppBundle\Entity\Invoice', 'i', 'p', 'invoice', array('id' => 'invoice_id'));
-            $rsm->addJoinedEntityFromClassMetadata('AppBundle\Entity\Warehouse', 'w', 'i', 'warehouse', array('id' => 'warehouse_id'));
-            $rsm->addJoinedEntityFromClassMetadata('AppBundle\Entity\Category', 'c', 'p', 'category', array('id' => 'category_id'));
-            $query = $entityManager->createNativeQuery("SELECT p.name, w.name as wname, p.amount, c.description
-            FROM product p
-            INNER JOIN invoice i on i.id = p.invoice_id
-            INNER JOIN warehouse w on w.id=i.warehouse_id
-            INNER JOIN category c on c.id=p.category_id
-            WHERE (p.category_id=? and w.id=?)", $rsm);
-            $query->setParameter(1, $data['category']);
-            $query->setParameter(2, $data['warehouse']);
-            $products = $query->getResult();
-            return $this->render('report/products.html.twig', array('products' => $products, 'form' => $form->createView()));
+            if ($data['category'] != "" and $data['warehouse'] != "") {
+                $query_string = 'SELECT p.id, p.product_name, c.id as cid, c.description, i.id as iid, w.id as wid, w.warehouseName FROM AppBundle\Entity\Product p JOIN p.category c JOIN p.invoice i JOIN i.warehouse w WHERE c.id=' . $data['category'] . ' AND w.id=' . $data['warehouse'];
+                $query = $entityManager->createQuery($query_string);
+                $products = $query->getResult();
+                if (count($products) > 0) {
+                    print_r($products);
+                    return $this->render('report/products.html.twig', array('products' => $products, 'form' => $form->createView()));
+                }
+            }
         }
-        $repository = $this->getDoctrine()->getRepository(Product::class);
-        $products = $repository->findAll();
+        $entityManager = $this->getDoctrine()->getManager();
+        $query = $entityManager->createQuery('SELECT p.id, p.product_name, c.id as cid, c.description, i.id as iid, w.id as wid, w.warehouseName FROM AppBundle\Entity\Product p JOIN p.category c JOIN p.invoice i JOIN i.warehouse w');
+        $products = $query->getResult();
         return $this->render('report/products.html.twig', array('products' => $products, 'form' => $form->createView()));
     }
 }

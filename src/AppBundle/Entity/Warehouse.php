@@ -20,7 +20,7 @@ class Warehouse
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $name;
+    private $warehouseName;
 
     /**
      * @ORM\Column(type="string", length=100)
@@ -79,9 +79,17 @@ class Warehouse
     /**
      * Get the value of name
      */
-    public function getName()
+    public function getWarehouseName()
     {
-        return $this->name;
+        return $this->warehouseName;
+    }
+
+    /**
+     * Get the value of name
+     */
+    public function getwarehouse_name()
+    {
+        return $this->warehouseName;
     }
 
     /**
@@ -89,9 +97,9 @@ class Warehouse
      *
      * @return  self
      */
-    public function setName($name)
+    public function setWarehouseName($warehouseName)
     {
-        $this->name = $name;
+        $this->warehouseName = $warehouseName;
 
         return $this;
     }

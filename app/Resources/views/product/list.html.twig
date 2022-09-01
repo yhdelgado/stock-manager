@@ -54,7 +54,7 @@
 									{% for product in products %}
 										<tr>
 											<td>
-												<a href="/product/show/{{product.id}}">{{ product.name }}</a>
+												<a href="/product/show/{{product.id}}">{{ product.product_name }}</a>
 											</td>
 											<td>
 												<a href="/category/{{product.category.id}}">{{ product.category.description }}</a>
@@ -64,7 +64,7 @@
 													{{ product.invoice.id }}</a>
 											</td>
 											<td>
-												<a href="/warehouse/{{product.invoice.warehouse.id}}">{{ product.invoice.warehouse.name }}</a>
+												<a href="/warehouse/{{product.invoice.warehouse.id}}">{{ product.invoice.warehouse.warehouse_name }}</a>
 											</td>
 										</tr>
 									{% endfor %}

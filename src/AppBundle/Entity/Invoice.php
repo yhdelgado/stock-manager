@@ -37,7 +37,7 @@ class Invoice
     /**
      * @ORM\Column(type="decimal", length=50, nullable=true)
      */
-    private $final_cost;
+    private $finalCost;
 
     /**
      * @ORM\ManyToOne(targetEntity="Warehouse", inversedBy="invoices")
@@ -96,9 +96,9 @@ class Invoice
     /**
      * Get the value of final_cost
      */
-    public function getFinal_cost()
+    public function getFinalCost()
     {
-        return $this->final_cost;
+        return $this->finalCost;
     }
 
     /**
@@ -106,9 +106,9 @@ class Invoice
      *
      * @return  self
      */
-    public function setFinal_cost($final_cost)
+    public function setFinalCost($finalCost)
     {
-        $this->final_cost = $final_cost;
+        $this->finalCost = $finalCost;
 
         return $this;
     }

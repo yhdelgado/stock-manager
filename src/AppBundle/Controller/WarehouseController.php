@@ -30,7 +30,7 @@ class WarehouseController extends Controller
     {
         $warehouse = new Warehouse();
         $form = $this->createFormBuilder($warehouse)
-            ->add('name', TextType::class, array('label' => 'Name', 'attr' => array('class' => 'form-control')))
+            ->add('warehouse_name', TextType::class, array('label' => 'Name', 'attr' => array('class' => 'form-control')))
             ->add('owner', TextType::class, array('label' => 'Owner', 'attr' => array('class' => 'form-control')))
             ->add('address', TextType::class, array('label' => 'Address', 'attr' => array('class' => 'form-control')))
             ->add('phone', TextType::class, array('label' => 'Phone', 'attr' => array('class' => 'form-control')))
@@ -54,7 +54,7 @@ class WarehouseController extends Controller
     }
 
     /**
-     * @Route("/warehouse/{id}", name="warehouse_show")
+     * @Route("/warehouse/show/{id}", name="warehouse_show")
      */
     public function showAction($id)
     {
@@ -70,7 +70,7 @@ class WarehouseController extends Controller
     {
         $warehouse = $this->getDoctrine()->getRepository(Warehouse::class)->find($id);
         $form = $this->createFormBuilder($warehouse)
-            ->add('name', TextType::class, array('label' => 'Name', 'attr' => array('class' => 'form-control')))
+            ->add('warehouse_name', TextType::class, array('label' => 'Name', 'attr' => array('class' => 'form-control')))
             ->add('owner', TextType::class, array('label' => 'Owner', 'attr' => array('class' => 'form-control')))
             ->add('address', TextType::class, array('label' => 'Address', 'attr' => array('class' => 'form-control')))
             ->add('phone', TextType::class, array('label' => 'Phone', 'attr' => array('class' => 'form-control')))
