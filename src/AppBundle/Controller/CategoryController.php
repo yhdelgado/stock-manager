@@ -45,7 +45,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * @Route("/category/{id}", name="category_show")
+     * @Route("/category/show/{id}", name="category_show")
      */
     public function showAction($id)
     {

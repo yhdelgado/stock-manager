@@ -41,12 +41,42 @@
 								<p>
 									<strong>Date:</strong>
 									{{invoice.date |date('Y-m-d')}}</p>
+								<table class="table table-bordered">
+									<thead>
+									<tr>
+										<th>Name</th>
+										<th>Category</th>
+										<th>Invoice</th>
+										<th>Warehouse</th>
+									</tr>
+									</thead>
+									</thdead>
+									<tbody>
+									{% for product in products %}
+										<tr>
+											<td>
+												<a href="/product/show/{{product.id}}">{{ product.productName }}</a>
+											</td>
+											<td>
+												<a href="/category/show/{{product.category.id}}">{{ product.category.description }}</a>
+											</td>
+											<td>
+												<a href="/invoice/show/{{product.invoice.id}}">Invoice
+													{{ product.invoice.id }}</a>
+											</td>
+											<td>
+												<a href="/warehouse/show/{{product.invoice.warehouse.id}}">{{ product.invoice.warehouse.warehouseName }}</a>
+											</td>
+										</tr>
+									{% endfor %}
+									</tbody>
+								</table>
 
 							</div>
 							<!-- /.card-body -->
 							<div class="card-footer">
 								<a href="/invoice/edit/{{invoice.id}}" class="btn btn-primary">Edit</a>
-								<a href="/invoice/delete/{{invoice.id}}" class="btn btn-danger">Delete</a>
+								<!--<a href="/invoice/delete/{{invoice.id}}" class="btn btn-danger">Delete</a>-->
 							</div>
 							<!-- /.card-footer-->
 						</div>
@@ -54,5 +84,5 @@
 					</div>
 				</div>
 			</section><!-- /.content --></div><!-- /.content-wrapper -->{% endblock %}
-	{% block stylesheets %}{}
+	{% block stylesheets %}
 	{% endblock %}

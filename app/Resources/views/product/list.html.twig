@@ -36,7 +36,7 @@
 						<div class="card">
 							<div class="card-header">
 								<h3 class="card-title">
-									<a href="{{ path('product_new') }}" class="btn btn-success">Filter</a>
+									<a href="{{ path('product_new') }}" class="btn btn-success">Add new</a>
 								</h3>
 							</div>
 							<div class="card-body">
@@ -54,17 +54,17 @@
 									{% for product in products %}
 										<tr>
 											<td>
-												<a href="/product/show/{{product.id}}">{{ product.product_name }}</a>
+												<a href="/product/show/{{product.id}}">{{ product.productName }}</a>
 											</td>
 											<td>
-												<a href="/category/{{product.category.id}}">{{ product.category.description }}</a>
+												<a href="/category/show/{{product.category.id}}">{{ product.category.description }}</a>
 											</td>
 											<td>
-												<a href="/invoice/{{product.invoice.id}}">Invoice
+												<a href="/invoice/show/{{product.invoice.id}}">Invoice
 													{{ product.invoice.id }}</a>
 											</td>
 											<td>
-												<a href="/warehouse/{{product.invoice.warehouse.id}}">{{ product.invoice.warehouse.warehouse_name }}</a>
+												<a href="/warehouse/show/{{product.invoice.warehouse.id}}">{{ product.invoice.warehouse.warehouseName }}</a>
 											</td>
 										</tr>
 									{% endfor %}

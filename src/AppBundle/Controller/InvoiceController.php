@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Invoice;
+use AppBundle\Entity\Product;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -50,12 +51,13 @@ class InvoiceController extends Controller
     }
 
     /**
-     * @Route("/invoice/{id}", name="invoice_show")
+     * @Route("/invoice/show/{id}", name="invoice_show")
      */
     public function showAction($id)
     {
         $invoice = $this->getDoctrine()->getRepository(Invoice::class)->find($id);
-        return $this->render('invoice/show.html.twig', array('invoice' => $invoice));
+        $products=$this->getDoctrine()->getRepository(Product::class)->findBy(array('invoice'=>$invoice));
+        return $this->render('invoice/show.html.twig', array('invoice' => $invoice,'products'=>$products));
     }
 
     /**
