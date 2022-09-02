@@ -1,12 +1,27 @@
-/web/bundles/
-/app/bootstrap.php.cache
-/app/cache/*
-/app/config/parameters.yml
-/app/logs/*
-!app/cache/.gitkeep
-!app/logs/.gitkeep
-/app/phpunit.xml
-/build/
-/vendor/
-/bin/
-/composer.phar
+# Composer
+vendor
+vendor/*
+!public/assets/js/vendor
+!public/assets/js/vendor/*
+!public/assets/css/vendor
+!public/assets/css/vendor/*
+composer.phar
+composer.lock
+
+# Symfony
+app/cache/*
+app/logs/*
+web/photo
+
+# Logs
+error.log
+access.log
+
+# IntelliJ - PhpStorm and PyCharm
+.idea
+.idea/
+.idea/*
+*.iml
+*.ipr
+*.iws
+

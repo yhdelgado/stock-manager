@@ -14,9 +14,9 @@
     },
     "require": {
         "php": ">=5.4",
-        "almasaeed2010/adminlte": "~3.2",
         "doctrine/doctrine-bundle": "~1.4",
         "doctrine/orm": "^2.4.8",
+        "h4cc/wkhtmltopdf-amd64": "^0.12.4",
         "incenteev/composer-parameter-handler": "~2.0",
         "knplabs/knp-snappy-bundle": "^1.5",
         "sensio/distribution-bundle": "~4.0",
