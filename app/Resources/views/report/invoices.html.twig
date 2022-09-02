@@ -9,15 +9,15 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Products</h1>
+                        <h1>Invoices</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item">
-                                <a href="{{ path('homepage') }}">Home</a>
+                                <a href="{{ path('homepage')}}">Home</a>
                             </li>
                             <li class="breadcrumb-item">
-                                <a href="#">Products</a>
+                                <a href="#">Invoices</a>
                             </li>
                         </ol>
                     </div>
@@ -45,28 +45,16 @@
                                 <table class="table table-bordered">
                                     <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Category</th>
-                                        <th>Invoice</th>
-                                        <th>Warehouse</th>
+                                        <th>Description</th>
                                     </tr>
                                     </thead>
                                     </thdead>
                                     <tbody>
-                                    {% for product in products %}
+                                    {% for invoice in invoices %}
                                         <tr>
                                             <td>
-                                                <a href="/product/show/{{ product.id }}">{{ product.productName }}</a>
-                                            </td>
-                                            <td>
-                                                <a href="/category/show/{{ product.category.id }}">{{ product.category.description }}</a>
-                                            </td>
-                                            <td>
-                                                <a href="/invoice/show/{{ product.invoice.id }}">Invoice
-                                                    {{ product.invoice.id }}</a>
-                                            </td>
-                                            <td>
-                                                <a href="/warehouse/show/{{ product.invoice.warehouse.id }}">{{ product.invoice.warehouse.warehouseName }}</a>
+                                                <a href="/invoice/show/{{invoice.id}}">Invoice
+                                                    {{ invoice.id }}</a>
                                             </td>
                                         </tr>
                                     {% endfor %}
@@ -77,7 +65,7 @@
                             <!-- /.card-body -->
                             <div class="card-footer">
                                 Total
-                                <span class="badge badge-info right">{{ products|length }}</span>
+                                <span class="badge badge-info right">{{ invoices|length }}</span>
                                 found
                             </div>
                             <!-- /.card-footer-->
@@ -91,7 +79,7 @@
     <!-- /.content-wrapper -->
 {% endblock %}
 {% block stylesheets %}
-    {# <style>
-																																						    
-																																						</style> #}
+    {#     <style>
+
+																																			</style> #}
 {% endblock %}

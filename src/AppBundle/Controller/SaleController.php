@@ -4,6 +4,7 @@
 namespace AppBundle\Controller;
 
 
+use AppBundle\Entity\Product;
 use AppBundle\Entity\Sale;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -16,6 +17,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class SaleController extends Controller
 {
+    private function computeFinalCost($products){
+        $finalCost=0;
+        foreach ($products as $product){
+            $finalCost+=$product->getSellPrice();
+        }
+        return $finalCost;
+    }
     /**
      * @Route("/sale/list", name="sale_list")
      */
@@ -53,12 +61,15 @@ class SaleController extends Controller
     }
 
     /**
-     * @Route("/sale/{id}", name="sale_show")
+     * @Route("/sale/show/{id}", name="sale_show")
      */
     public function showAction($id)
     {
         $sale = $this->getDoctrine()->getRepository(Sale::class)->find($id);
-        return $this->render('sale/show.html.twig', array('sale' => $sale));
+        $products=$this->getDoctrine()->getRepository(Product::class)->findBy(array('invoice'=>$sale));
+        $finalCost=$this->computeFinalCost($products);
+        $sale->setFinalCost($finalCost);
+        return $this->render('sale/show.html.twig', array('sale' => $sale, 'products'=>$products));
     }
 
     /**

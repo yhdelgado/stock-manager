@@ -44,12 +44,53 @@
 								<p>
 									<strong>Client:</strong>
 									{{sale.client}}</p>
+								<p>
+									<strong>Final cost:</strong>
+									{{sale.finalCost}}</p>
+								<table class="table table-bordered">
+									<thead>
+									<tr>
+										<th>Name</th>
+										<th>Category</th>
+										<th>Sale</th>
+										<th>Warehouse</th>
+										<th>Sell price</th>
+										<th>Amount</th>
+									</tr>
+									</thead>
+									</thdead>
+									<tbody>
+									{% for product in products %}
+										<tr>
+											<td>
+												<a href="/product/show/{{product.id}}">{{ product.productName }}</a>
+											</td>
+											<td>
+												<a href="/category/show/{{product.category.id}}">{{ product.category.description }}</a>
+											</td>
+											<td>
+												<a href="/sale/show/{{product.invoice.id}}">Sale
+													{{ product.invoice.id }}</a>
+											</td>
+											<td>
+												<a href="/warehouse/show/{{product.invoice.warehouse.id}}">{{ product.invoice.warehouse.warehouseName }}</a>
+											</td>
+											<td>
+												{{ product.sellPrice }}
+											</td>
+											<td>
+												{{ product.amount }}
+											</td>
+										</tr>
+									{% endfor %}
+									</tbody>
+								</table>
 
 							</div>
 							<!-- /.card-body -->
 							<div class="card-footer">
 								<a href="/sale/edit/{{sale.id}}" class="btn btn-primary">Edit</a>
-								<a href="/sale/delete/{{sale.id}}" class="btn btn-danger">Delete</a>
+								<!--<a href="/sale/delete/{{sale.id}}" class="btn btn-danger">Delete</a>-->
 							</div>
 							<!-- /.card-footer-->
 						</div>

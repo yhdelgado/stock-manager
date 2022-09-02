@@ -1,0 +1,57 @@
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div
+                    class="col-12">
+                <!-- Default box -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Invoice</th>
+                                <th>Warehouse</th>
+                            </tr>
+                            </thead>
+                            </thdead>
+                            <tbody>
+                            {% for product in products %}
+                                <tr>
+                                    <td>
+                                        {{ product.productName }}
+                                    </td>
+                                    <td>
+                                        {{ product.category.description }}
+                                    </td>
+                                    <td>
+                                        Invoice
+                                        {{ product.invoice.id }}
+                                    </td>
+                                    <td>
+                                        {{ product.invoice.warehouse.warehouseName }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer">
+
+                    </div>
+                    <!-- /.card-footer-->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+</section>
+<!-- /.content -->

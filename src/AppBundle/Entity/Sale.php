@@ -32,4 +32,5 @@ class Sale extends Invoice
     {
         $this->client = $client;
     }
+
 }

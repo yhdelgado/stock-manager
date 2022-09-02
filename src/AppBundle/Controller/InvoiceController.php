@@ -4,8 +4,11 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Invoice;
 use AppBundle\Entity\Product;
+use AppBundle\Entity\Sale;
+use AppBundle\Entity\Warehouse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -15,14 +18,39 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class InvoiceController extends Controller
 {
+    private function computeFinalCost($products)
+    {
+        $finalCost = 0;
+        foreach ($products as $product) {
+            $finalCost += $product->getSellPrice();
+        }
+        return $finalCost;
+    }
+
+    function isInstanceOf($object, array $classnames)
+    {
+        foreach ($classnames as $classname) {
+            if ($object instanceof $classname) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * @Route("/invoice/list", name="invoice_list")
      */
     public function listAction(Request $request)
     {
+        $invoices_list = array();
         $repository = $this->getDoctrine()->getRepository(Invoice::class);
         $invoices = $repository->findAll();
-        return $this->render('invoice/list.html.twig', array('invoices' => $invoices));
+        foreach ($invoices as $invoice) {
+            if (!$this->isInstanceOf($invoice, array('AppBundle\Entity\Sale'))) {
+                array_push($invoices_list, $invoice);
+            }
+        }
+        return $this->render('invoice/list.html.twig', array('invoices' => $invoices_list));
     }
 
     /**
@@ -56,8 +84,10 @@ class InvoiceController extends Controller
     public function showAction($id)
     {
         $invoice = $this->getDoctrine()->getRepository(Invoice::class)->find($id);
-        $products=$this->getDoctrine()->getRepository(Product::class)->findBy(array('invoice'=>$invoice));
-        return $this->render('invoice/show.html.twig', array('invoice' => $invoice,'products'=>$products));
+        $products = $this->getDoctrine()->getRepository(Product::class)->findBy(array('invoice' => $invoice));
+        $finalCost = $this->computeFinalCost($products);
+        $invoice->setFinalCost($finalCost);
+        return $this->render('invoice/show.html.twig', array('invoice' => $invoice, 'products' => $products));
     }
 
     /**
@@ -97,5 +127,56 @@ class InvoiceController extends Controller
         $response = new Response();
         $response->send();
         return $this->redirectToRoute('invoice_list');
+    }
+
+    /**
+     * @Route("/invoice/report", name="invoice_report")
+     */
+    public function reportAction(Request $request)
+    {
+        $form = $this->createFormBuilder()
+            ->add('type', ChoiceType::class, array(
+                'choices' => [1 => 'Invoice', 2 => 'Sale'],
+                'label' => 'Type', 'attr' => array('class' => 'form-control'), 'required' => false
+            ))
+            ->add('warehouse', 'entity', array(
+                'class' => 'AppBundle:Warehouse',
+                'property' => 'warehouse_name', 'label' => 'Warehouse', 'attr' => array('class' => 'form-control'), 'required' => false
+            ))
+            ->add('save', SubmitType::class, array('label' => 'Search', 'attr' => array('class' => 'btn btn-primary mt-3')))
+            ->getForm();
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $invoices = array();
+            if ($data['warehouse'] != null) {
+                $repository = $this->getDoctrine()->getRepository(Warehouse::class);
+                $warehouse = $repository->find($data['warehouse']);
+                $invoices = $warehouse->getInvoices();
+            }
+            $invoices_list = array();
+            if ($data['type'] != null) {
+                if ($data['type'] == 1) {
+                    foreach ($invoices as $invoice) {
+                        if (!$this->isInstanceOf($invoice, array('AppBundle\Entity\Sale'))) {
+                            array_push($invoices_list, $invoice);
+                        }
+                    }
+                    return $this->render('report/invoices.html.twig', array('invoices' => $invoices_list, 'form' => $form->createView()));
+                }
+                if ($data['type'] == 2) {
+                    foreach ($invoices as $invoice) {
+                        if ($this->isInstanceOf($invoice, array('AppBundle\Entity\Sale'))) {
+                            array_push($invoices_list, $invoice);
+                        }
+                    }
+                    return $this->render('report/invoices.html.twig', array('invoices' => $invoices_list, 'form' => $form->createView()));
+                }
+            }
+            return $this->render('report/invoices.html.twig', array('invoices' => $invoices, 'form' => $form->createView()));
+        }
+        $repository = $this->getDoctrine()->getRepository(Invoice::class);
+        $invoices = $repository->findAll();
+        return $this->render('report/invoices.html.twig', array('invoices' => $invoices, 'form' => $form->createView()));
     }
 }
